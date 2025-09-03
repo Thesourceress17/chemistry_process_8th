@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחק התהליכים הכימיים</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #4a5568;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .score {
+            background: #48bb78;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .back-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #3182ce;
+        }
+
+        .game-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .element-card {
+            background: linear-gradient(145deg, #e2e8f0, #cbd5e0);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .element-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .process-card {
+            background: linear-gradient(145deg, #fef5e7, #f6e05e);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .process-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #744210;
+            margin-bottom: 15px;
+        }
+
+        .result-area {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 3px dashed #cbd5e0;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-text {
+            font-size: 1.3em;
+            color: #4a5568;
+        }
+
+        .answer-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .answer-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #4299e1;
+            color: white;
+        }
+
+        .answer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .correct {
+            background: #48bb78 !important;
+            animation: pulse 0.6s;
+        }
+
+        .incorrect {
+            background: #f56565 !important;
+            animation: shake 0.6s;
+        }
+
+        .next-btn {
+            background: #805ad5;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        .next-btn:hover {
+            background: #6b46c1;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .feedback {
+            background: #e6fffa;
+            border: 2px solid #38b2ac;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: right;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+            
+            .game-area {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .answer-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-btn" onclick="goHome()">← חזור להוראות</button>
+        
+        <div class="header">
+            <h1>🧪 משחק התהליכים הכימיים 🧪</h1>
+            <div class="score">ניקוד: <span id="score">0</span></div>
+        </div>
+
+        <div class="game-area">
+            <div class="element-card">
+                <div class="element-name" id="current-element">ברזל (Fe)</div>
+                <div style="font-size: 3em;">⚙️</div>
+            </div>
+            
+            <div class="process-card">
+                <div class="process-name" id="current-process">חימום</div>
+                <div style="font-size: 3em;">🔥</div>
+            </div>
+        </div>
+
+        <div class="result-area">
+            <div class="result-text">מה קורה כאשר <span id="element-in-question">ברזל</span> עובר תהליך של <span id="process-in-question">חימום</span>?</div>
+        </div>
+
+        <div class="answer-buttons" id="answer-buttons">
+            <!-- תשובות יווצרו כאן בצורה דינמית -->
+        </div>
+
+        <button class="next-btn" id="next-btn" style="display: none;" onclick="nextQuestion()">שאלה הבאה</button>
+        
+        <div id="feedback" class="feedback" style="display: none;"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
