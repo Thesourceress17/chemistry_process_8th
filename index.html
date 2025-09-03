@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחק התהליכים הכימיים - הוראות</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .welcome-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .welcome-card h1 {
+            color: #4a5568;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+
+        .instructions-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .instructions-card h2 {
+            color: #2d3748;
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 3px solid #4299e1;
+            padding-bottom: 15px;
+        }
+
+        .instruction-item {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-right: 5px solid #4299e1;
+        }
+
+        .instruction-item h3 {
+            color: #2d3748;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .instruction-item .icon {
+            font-size: 1.5em;
+            margin-left: 15px;
+        }
+
+        .instruction-item p {
+            color: #4a5568;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .tips-card {
+            background: linear-gradient(145deg, #fef5e7, #f6e05e);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .tips-card h2 {
+            color: #744210;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tip {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .tip strong {
+            color: #744210;
+        }
+
+        .start-btn {
+            background: linear-gradient(145deg, #48bb78, #38a169);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            background: linear-gradient(145deg, #38a169, #2f855a);
+        }
+
+        .elements-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .element-preview {
+            background: linear-gradient(145deg, #e2e8f0, #cbd5e0);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .element-preview .symbol {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .element-preview .name {
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .processes-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .process-preview {
+            background: linear-gradient(145deg, #fef5e7, #f6e05e);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .process-preview .symbol {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .process-preview .name {
+            font-weight: bold;
+            color: #744210;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .welcome-card, .instructions-card {
+                padding: 25px;
+            }
+            
+            .welcome-card h1 {
+                font-size: 2.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-card">
+            <h1>🧪 משחק התהליכים הכימיים 🧪</h1>
+            <p class="subtitle">למדו כימיה בצורה מהנה ואינטראקטיבית!</p>
+            <p>משחק חינוכי לתלמידי כיתה ח' ללימוד תהליכים כימיים ופיזיקליים</p>
+        </div>
+
+        <div class="instructions-card">
+            <h2>🎯 איך משחקים?</h2>
+            
+            <div class="instruction-item">
+                <h3><span class="icon">⚡</span>מטרת המשחק</h3>
+                <p>בכל שאלה תראו יסוד כימי מסוים ותהליך פיזיקלי או כימי. המטרה היא לנחש מה קורה ליסוד כאשר הוא עובר את התהליך הזה.</p>
+            </div>
+
+            <div class="instruction-item">
+                <h3><span class="icon">🔬</span>היסודות במשחק</h3>
+                <div class="elements-preview">
+                    <div class="element-preview">
+                        <div class="symbol">⚙️</div>
+                        <div class="name">ברזל (Fe)</div>
+                    </div>
+                    <div class="element-preview">
+                        <div class="symbol">💨</div>
+                        <div class="name">חמצן (O₂)</div>
+                    </div>
+                    <div class="element-preview">
+                        <div class="symbol">💧</div>
+                        <div class="name">מים (H₂O)</div>
+                    </div>
+                    <div class="element-preview">
+                        <div class="symbol">◼️</div>
+                        <div class="name">פחמן (C)</div>
+                    </div>
+                    <div class="element-preview">
+                        <div class="symbol">✨</div>
+                        <div class="name">זהב (Au)</div>
+                    </div>
+                    <div class="element-preview">
+                        <div class="symbol">🌟</div>
+                        <div class="name">כסף (Ag)</div>
+                    </div>
+                    <div class="element-preview">
+                        <div class="symbol">🟫</div>
+                        <div class="name">נחושת (Cu)</div>
+                    </div>
+                    <div class="element-preview">
+                        <div class="symbol">🔲</div>
+                        <div class="name">אלומיניום (Al)</div>
+                    </div>
+                    <div class="element-preview">
+                        <div class="symbol">🟡</div>
+                        <div class="name">גופרית (S)</div>
+                    </div>
+                    <div class="element-preview">
+                        <div class="symbol">⚪</div>
+                        <div class="name">מגנזיום (Mg)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instruction-item">
+                <h3><span class="icon">🌡️</span>התהליכים במשחק</h3>
+                <div class="processes-preview">
+                    <div class="process-preview">
+                        <div class="symbol">🔥</div>
+                        <div class="name">חימום</div>
+                    </div>
+                    <div class="process-preview">
+                        <div class="symbol">🌬️</div>
+                        <div class="name">חימצון</div>
+                    </div>
+                    <div class="process-preview">
+                        <div class="symbol">❄️</div>
+                        <div class="name">קירור</div>
+                    </div>
+                    <div class="process-preview">
+                        <div class="symbol">🧊</div>
+                        <div class="name">הקפאה</div>
+                    </div>
+                    <div class="process-preview">
+                        <div class="symbol">🌡️</div>
+                        <div class="name">התחממות</div>
+                    </div>
+                    <div class="process-preview">
+                        <div class="symbol">♨️</div>
+                        <div class="name">התכה</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instruction-item">
+                <h3><span class="icon">🎲</span>כללי המשחק</h3>
+                <p>המשחק כולל 20 שאלות. בכל שאלה תקבלו 4 אפשרויות תשובה. בחרו את התשובה הנכונה וקבלו הסבר מפורט על התהליך. הניקוד: 10 נקודות לכל תשובה נכונה!</p>
+            </div>
+        </div>
+
+        <div class="tips-card">
+            <h2>💡 עצות ללמידה מיטבית</h2>
+            
+            <div class="tip">
+                <strong>שלב ראשון - למידה עם חברים:</strong> התחילו את המשחק עם חברי הכיתה. דונו בתשובות ולמדו יחד מההסברים המפורטים.
+            </div>
+            
+            <div class="tip">
+                <strong>שלב שני - חיפוש ומחקר:</strong> פתחו מחשב או ספר כימיה לצד המשחק. כשאתם לא בטוחים - חפשו את התשובה ולמדו!
+            </div>
+            
+            <div class="tip">
+                <strong>שלב שלישי - מבחן עצמי:</strong> לאחר שלמדתם את החומר, שחקו שוב "על עיוור" בלי עזרה. זה יבדוק כמה באמת למדתם!
+            </div>
+            
+            <div class="tip">
+                <strong>טיפ זהב:</strong> שימו לב להסברים המפורטים אחרי כל תשובה - שם נמצא הלמידה האמיתית! 🏆
+            </div>
+        </div>
+
+        <button class="start-btn" onclick="startGame()">🚀 בואו נתחיל לשחק!</button>
+
+        <div class="footer">
+            <p>משחק חינוכי לכיתה ח' • נוצר עם ❤️ ללמידת כימיה מהנה</p>
+        </div>
+    </div>
+
+    <script>
+        function startGame() {
+            window.location.href = 'game.html';
+        }
+    </script>
+</body>
+</html>
