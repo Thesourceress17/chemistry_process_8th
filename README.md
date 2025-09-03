@@ -5,7 +5,7 @@
 [🚀 שחק עכשיו!](https://thesourceress17.github.io/chemistry_process/)
 
 ## מה כלול במשחק:
-- 10 יסודות כימיים  
+- 10 יסודות ותרכובת כימיים  
 - 6 תהליכים כימיים/פיזיקליים
 - 20 שאלות עם הסברים מפורטים
 
